@@ -9,7 +9,7 @@ const logger = require('./../app/utils/logger'),
 
 const server = {
     httpServer: (app) => {
-        const port = normalizePort(process.env.NODEJS_PORT || '3000');
+        const port = normalizePort(process.env.NODEJS_PORT || '3001');
         app.set('port', port);
         /**
          * Create HTTP server.
