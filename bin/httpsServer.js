@@ -10,7 +10,7 @@ const logger = require('./../app/utils/logger'),
 
 const server = {
     httpsServer: (options, app) => {
-        const securePort = normalizeSecurePort(process.env.NODEJS_SECURE_PORT || '8443');
+        const securePort = normalizeSecurePort(process.env.NODEJS_SECURE_PORT || '3000');
         app.set('securePort', securePort);
         /**
          * Create secure HTTPS server
