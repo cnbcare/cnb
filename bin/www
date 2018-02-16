@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+"use strict";
+/**
+ * Module dependencies.
+ */
+const app = require('../app'),
+    config = require('./../app/config'),
+    logger = require('./../app/utils/logger'),
+    fs = require('fs');
+
+const httpServer = require('./httpServer');
+const httpsServer = require('./httpsServer');
+
+/**
+ * create HTTP server
+ */
+httpServer.httpServer(app);
+
+/**
+ *create HTTPS server 
+ */
+if (config.ssh_key.key_pem !== undefined && config.ssh_key.server_crt !== undefined) {
+    // Options used to create HTTPS server
+    let options = {
+        key: fs.readFileSync(config.ssh_key.key_pem),
+        cert: fs.readFileSync(config.ssh_key.server_crt),
+        requestCert: true,
+        rejectUnauthorized: false
+    };
+    httpsServer.httpsServer(options, app);
+} else {
+    logger.debug("If you need to use Https server you must set path to key.pem and server.crt in config.properties");
+}

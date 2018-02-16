@@ -1,0 +1,9 @@
+node_modules/
+node/
+target/
+etc/
+.sonar_lock
+.vscode
+debug.log
+all-logs.log
+coverage

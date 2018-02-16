@@ -4,7 +4,7 @@ DELIMITER |
  CREATE PROCEDURE cnbcarechw59.maj_mesure (IN type_mesure VARCHAR(10),IN email1  VARCHAR(10) CHARSET utf8 , IN modele1 VARCHAR(10),IN value1 INT )  
 BEGIN 
 	 select   id into   @patient_id1      from cnbcarechw59.patient where login =   email1 limit 1  ;
-	 select id into  @marque_bracelet_id1  from cnbcarechw59.marque_bracelet where modèle =   modele1  limit 1 ;
+	 select id into  @marque_bracelet_id1  from cnbcarechw59.marque_bracelet where modÃ¨le =   modele1  limit 1 ;
 	 select id into  @session_patient_id1 from cnbcarechw59.session_patient where patient_id=  @patient_id1 and marque_bracelet_id= @marque_bracelet_id1  limit 1 ;
 		IF  (@patient_id1 IS NOT NULL)  THEN  
 			  insert into cnbcarechw59.mesure(valeur_type_nombre ,

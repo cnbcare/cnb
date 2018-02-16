@@ -1,0 +1,4 @@
+module.exports = {
+    INTERNAL_ERROR: "INTERNAL_ERROR",
+    BAD_REQUEST: "BAD_REQUEST"
+};

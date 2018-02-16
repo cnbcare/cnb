@@ -1,0 +1,38 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Starter Kit Expressjs",
+        "contact": {
+            "email": "id.pole.technique@auchan.com"
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/sample/v1/hello": {
+            "get": {
+                "description": "Hello world sample",
+                "operationId": "hello",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "description": "Error"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+
+    }
+}
