@@ -33,7 +33,6 @@ router.post('/v1/mesure_sante', (req, res) => {
             res.status(HttpStatus.CREATED).send(results);
         })
         .catch((error) => {
-            pool.close();
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
         });
     })
@@ -47,7 +46,6 @@ router.get('/v1/mesure_sante', (req, res) => {
             res.status(HttpStatus.OK).send(rows);
         })
         .catch((error) => {
-            pool.close();
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
         });
 });
@@ -61,7 +59,6 @@ router.get('/v1/mesure_sante/:user', (req, res) => {
             res.status(HttpStatus.OK).send(rows);
         })
         .catch((error) => {
-            pool.close();
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
         });
 });
