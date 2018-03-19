@@ -8,7 +8,7 @@ const pool = require('./../database/connection');
 router.post('/v1/mesure_sante', (req, res) => {
     let data = req.body;
     console.log(data);
-    
+
     let query = `CALL maj_mesure(?, ?, ?, ?, ?)`;
     let dataToInsert = [];
 
@@ -23,18 +23,21 @@ router.post('/v1/mesure_sante', (req, res) => {
     }
     if (data.bvp.value1 !== 0 && data.bvp.value1 !== null) {
         dataToInsert.push(['bvp', data.user, data.montre, data.timestamp, data.bvp.value1]);
-    } 
+    }
     if (data.bvp.value2 !== 0 && data.bvp.value2 !== null) {
         dataToInsert.push(['bvp2', data.user, data.montre, data.timestamp, data.bvp.value2]);
     }
-    dataToInsert.forEach((row)=>{
+    if (data.step.value !== 0 && data.step.value !== null) {
+        dataToInsert.push(['step', data.user, data.montre, data.timestamp, data.step.value]);
+    }
+    dataToInsert.forEach((row) => {
         pool.query(query, row)
-        .then(results => {
-            res.status(HttpStatus.CREATED).send(results);
-        })
-        .catch((error) => {
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
-        });
+            .then(results => {
+                res.status(HttpStatus.CREATED).send(results);
+            })
+            .catch((error) => {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
+            });
     })
 
 });
@@ -52,7 +55,7 @@ router.get('/v1/mesure_sante', (req, res) => {
 
 router.get('/v1/mesure_sante/:user', (req, res) => {
     let user = req.params.user;
-    let query =  `SELECT * FROM mesure WHERE mesure.patient_id = (
+    let query = `SELECT * FROM mesure WHERE mesure.patient_id = (
         SELECT id FROM patient WHERE patient.login=?)`;
     pool.query(query, user)
         .then(rows => {
